@@ -1,12 +1,8 @@
 const express = require("express");
-const indexRoutes = require("./routes/index.routes");
 const app = express();
+const authRoutes = require("./routes/auth.routes");
 
-app.use((req, res, next) => {
-  console.log("Application-Level Middleware");
-  next();
-});
-
-app.use("/", indexRoutes);
+app.use(express.json());
+app.use("/auth", authRoutes);
 
 module.exports = app;
