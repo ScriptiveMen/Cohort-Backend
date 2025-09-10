@@ -1,13 +1,24 @@
-const express = require("express");
-const indexRoutes = require("./routes/index.routes");
+import { config } from "dotenv";
+import express, { response } from "express";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { PromptTemplate } from "@langchain/core/prompts";
+
+config();
 const app = express();
 
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+const model = new ChatGoogleGenerativeAI({
+  model: "gemini-2.0-flash",
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const promptTemplate = PromptTemplate.fromTemplate(`
+    Explain {topic} like ELI5.
+    Keep you answer short and concise, don't use uneccessary jargons.
+    `);
 
-app.use("/", indexRoutes);
+const chain = promptTemplate.pipe(model);
+chain.invoke({ topic: "Express" }).then((response) => {
+  console.log(response.content);
+});
 
-module.exports = app;
+export default app;
