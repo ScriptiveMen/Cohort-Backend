@@ -12,7 +12,11 @@ app.post("/api/auth/register", (req, res) => {
 
 app.get("/", (req, res) => {
   res.render("index", {
-    message: ["Hello", "How are you?", "Good afternoon!"],
+    message: [
+      `<h1> Hello </h1>`,
+      `<h2> Welcome to </h2>`,
+      `<h1> Macbook Air </h1>`,
+    ],
   });
 });
 
