@@ -11,7 +11,9 @@ app.post("/api/auth/register", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("index", { message: "Welcome to Home Page" });
+  res.render("index", {
+    message: ["Hello", "How are you?", "Good afternoon!"],
+  });
 });
 
 module.exports = app;

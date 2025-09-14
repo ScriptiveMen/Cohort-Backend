@@ -30,6 +30,8 @@
     </style>
   </head>
   <body>
-    <h1><%= message %></h1>
+    <% message.forEach(msg=>{ %>
+    <h1><%= msg %></h1>
+    <%}) %>
   </body>
 </html>
