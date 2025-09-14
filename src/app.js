@@ -1,24 +1,17 @@
-import { config } from "dotenv";
-import express, { response } from "express";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { PromptTemplate } from "@langchain/core/prompts";
-
-config();
+const express = require("express");
 const app = express();
+const morgan = require("morgan");
 
-const model = new ChatGoogleGenerativeAI({
-  model: "gemini-2.0-flash",
-  apiKey: process.env.GEMINI_API_KEY,
+app.set("view engine", "ejs");
+
+app.use(morgan("dev"));
+
+app.post("/api/auth/register", (req, res) => {
+  res.status(200).json({ message: "User registered!" });
 });
 
-const promptTemplate = PromptTemplate.fromTemplate(`
-    Explain {topic} like ELI5.
-    Keep you answer short and concise, don't use uneccessary jargons.
-    `);
-
-const chain = promptTemplate.pipe(model);
-chain.invoke({ topic: "Express" }).then((response) => {
-  console.log(response.content);
+app.get("/", (req, res) => {
+  res.render("index", { message: "Welcome to Home Page" });
 });
 
-export default app;
+module.exports = app;
