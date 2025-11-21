@@ -4,9 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "npx nodemon server.js",
-        "start": "node server.js"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
@@ -21,9 +19,10 @@
     },
     "homepage": "https://github.com/ScriptiveMen/Cohort-Backend#readme",
     "dependencies": {
-        "@langchain/core": "^1.0.6",
-        "@langchain/google-genai": "^1.0.3",
+        "@google/genai": "^1.30.0",
+        "@modelcontextprotocol/sdk": "^1.22.0",
         "dotenv": "^17.2.3",
-        "express": "^5.1.0"
+        "express": "^5.1.0",
+        "zod": "^4.1.12"
     }
 }
